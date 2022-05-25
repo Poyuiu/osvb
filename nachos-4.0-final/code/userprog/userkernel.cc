@@ -11,6 +11,7 @@
 #include "userkernel.h"
 #include "synchdisk.h"
 #include "synchconsole.h"
+#include "debug.h"
 
 //----------------------------------------------------------------------
 // UserProgKernel::UserProgKernel

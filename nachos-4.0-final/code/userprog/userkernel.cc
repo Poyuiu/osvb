@@ -196,9 +196,10 @@ void
 UserProgKernel::InitializeAllThreads()
 {
     for (int i = 1; i <= execfileNum; i++){
-        // cout << "execfile[" << i << "]: " << execfile[i] << " start " << endl;
+        cout << "execfile[" << i << "]: " << execfile[i] << " start " << endl;
+		Debug(dbgSJF, "yoyoyo");
         int a = InitializeOneThread(execfile[i]);
-        // cout << "execfile[" << i << "]: " << execfile[i] << " end "<< endl;
+        cout << "execfile[" << i << "]: " << execfile[i] << " end "<< endl;
     }
     // After InitializeAllThreads(), let main thread be terminated that we can start to run our thread.
     currentThread->Finish();

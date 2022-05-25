@@ -11,7 +11,6 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
-#include "debug.h"
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -54,7 +53,7 @@ Alarm::CallBack()
 {
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
-	DEBUG(dbgSJF, "currentTick: " << kernel->stats->totalTicks);
+	cout << kernel->stats->totalTicks << "\n";
 	if (status == IdleMode) {	// is it time to quit?
 		if (!interrupt->AnyFutureInterrupts()) {
 			timer->Disable();	// turn off the timer

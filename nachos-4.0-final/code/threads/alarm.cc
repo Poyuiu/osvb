@@ -11,6 +11,7 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
+#include "debug.h"
 
 //----------------------------------------------------------------------
 // Alarm::Alarm

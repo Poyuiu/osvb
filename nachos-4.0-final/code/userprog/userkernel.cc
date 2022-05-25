@@ -198,6 +198,7 @@ UserProgKernel::InitializeAllThreads()
 {
     for (int i = 1; i <= execfileNum; i++){
         cout << "execfile[" << i << "]: " << execfile[i] << " start " << endl;
+		DEBUG(dbgSJF);
 		DEBUG(dbgSJF, "yoyoyo");
         int a = InitializeOneThread(execfile[i]);
         cout << "execfile[" << i << "]: " << execfile[i] << " end "<< endl;

@@ -51,7 +51,7 @@ extern Debug *debug;
 //      If flag is enabled, print a message.
 //----------------------------------------------------------------------
 #define DEBUG(flag,expr)                                                     \
-    if (!debug->IsEnabled(flag)) { cerr << "flag angry" << "\n"; } else { 				\
+    if (!debug->IsEnabled(flag)) {} else { 				\
         cerr << expr << "\n";   				        \
     }
 

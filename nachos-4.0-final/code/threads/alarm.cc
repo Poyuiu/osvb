@@ -53,7 +53,7 @@ Alarm::CallBack()
 {
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
-    DEBUG(dbgSJF, "hello");
+    cout << "hello" << endl;
 	if (status == IdleMode) {	// is it time to quit?
 		if (!interrupt->AnyFutureInterrupts()) {
 			timer->Disable();	// turn off the timer

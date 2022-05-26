@@ -228,11 +228,12 @@ Scheduler::Print()
 //<TODO>
 //Function definition of sorting rule of readyQueue
 static int readyQueueSorting(List<Thread *> *rq) {
-    // if(rq->numInList == 2)
-        DEBUG(dbgSJF, "***Thread [" << rq->first->item->getID() << "]'s and thread ["
-                << rq->last->item->getID() << "]'s burst time are["
-                << rq->first->item->getPredictedBurstTime() << "] and ["
-                << rq->last->item->getPredictedBurstTime() << "]***")
+    if(rq->NumInList() == 2)
+        // DEBUG(dbgSJF, "***Thread [" << rq->NumInList << "]'s and thread ["
+        //         << rq->last->item->getID() << "]'s burst time are["
+        //         << rq->first->item->getPredictedBurstTime() << "] and ["
+        //         << rq->last->item->getPredictedBurstTime() << "]***")
+        DEBUG(dbgSJF, "pass");
     return 0;
 }
 // <TODO>

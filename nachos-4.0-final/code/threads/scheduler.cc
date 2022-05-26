@@ -43,7 +43,7 @@ Scheduler::Scheduler()
 {
 	// schedulerType = type;
 	// readyList = new List<Thread *>;
-    readyQueue = new List<Thread *>;
+    readyQueue = new SortedList<Thread *>(SJFCompare);
 	toBeDestroyed = NULL;
 }
 //<TODO>

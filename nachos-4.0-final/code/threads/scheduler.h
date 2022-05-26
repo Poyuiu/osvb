@@ -47,7 +47,7 @@ class Scheduler {
 
 	//<TODO>
 	//Variable definition of sorting rule of readyQueue
-	List<Thread *> *readyQueue;
+	SortedList<Thread *> *readyQueue;
 	//<TODO>
 
 	Thread *toBeDestroyed;		// finishing thread to be destroyed

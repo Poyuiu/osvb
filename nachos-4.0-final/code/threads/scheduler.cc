@@ -78,13 +78,20 @@ void Scheduler::ReadyToRun(Thread* thread)
   DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
 
   thread->setStatus(READY);
-  
+
   readyQueue->Append(thread);
   readyQueueSorting(readyQueue);
 
   DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                              << thread->getID()
                              << "] is inserted into readyQueue")
+  if (readyQueue->NumInList() == 2)
+    DEBUG(dbgSJF, "***Thread ["
+                      << readyQueue->Front()->getID << "]'s and thread ["
+                      << thread->getID()
+                      << "]'s burst time are["
+                      << readyQueue->Front()->getPredictedBurstTime() << "] and ["
+                      << thread->getPredictedBurstTime() << "]***")
 }
 //<TODO>
 
@@ -228,12 +235,7 @@ Scheduler::Print()
 //<TODO>
 //Function definition of sorting rule of readyQueue
 static int readyQueueSorting(List<Thread *> *rq) {
-    if(rq->NumInList() == 2)
-        // DEBUG(dbgSJF, "***Thread [" << rq->NumInList << "]'s and thread ["
-        //         << rq->last->item->getID() << "]'s burst time are["
-        //         << rq->first->item->getPredictedBurstTime() << "] and ["
-        //         << rq->last->item->getPredictedBurstTime() << "]***")
-        DEBUG(dbgSJF, "pass");
+    
     return 0;
 }
 // <TODO>

@@ -242,8 +242,8 @@ static int readyQueueSorting(List<Thread*>* rq)
   return 0;
 }
 static int SJFCompare(Thread *a, Thread *b) {
-    if(a->getPredictedBurstTime() == b->getPredictedBurstTime())
-        return 0;
+    // if(a->getPredictedBurstTime() == b->getPredictedBurstTime())
+    //     return 0;
     return a->getPredictedBurstTime() > b->getPredictedBurstTime() ? 1 : -1;
 }
 // <TODO>

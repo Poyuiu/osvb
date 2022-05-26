@@ -230,14 +230,14 @@ Scheduler::Print()
 //Function definition of sorting rule of readyQueue
 static int readyQueueSorting(List<Thread*>* rq) 
 {
-//   if (rq->NumInList() == 2)
-    DEBUG(dbgSJF, "***Thread ["
+    if ((int)rq->NumInList() == 2)
+        DEBUG(dbgSJF, "***Thread ["
                       << rq->Front()->getID() << "]'s and thread ["
-                      << thread->getID() 
+                      << rq->Tail()->getID() 
                       << "]'s burst time are["
                       << rq->Front()->getPredictedBurstTime()
                       << "] and [" 
-                      << thread->getPredictedBurstTime() 
+                      << rq->Tail()->getPredictedBurstTime() 
                       << "]***")
   return 0;
 }

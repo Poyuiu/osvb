@@ -50,6 +50,7 @@ class List {
     virtual void Append(T item); // Put item at the end of the list
 
     T Front() { return first->item; }
+    T Tail() { return last->item; }
     				// Return first item on list
 				// without removing it
     T RemoveFront(); 		// Take item off the front of the list

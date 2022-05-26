@@ -40,7 +40,7 @@ static int readyQueueSorting(List<Thread *> *rq);
 // Initialize ReadyQueue
 Scheduler::Scheduler()
 {
-	//	schedulerType = type;
+	schedulerType = type;
 	// readyList = new List<Thread *>;
     readyQueue = new List<Thread *>;
 	toBeDestroyed = NULL;

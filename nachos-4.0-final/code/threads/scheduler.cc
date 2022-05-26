@@ -75,14 +75,16 @@ Scheduler::~Scheduler()
 // When putting a new thread into readyQueue, you need to check whether preemption or not.
 void Scheduler::ReadyToRun(Thread* thread) 
 {
-  ASSERT(kernel->interrupt->getLevel() == IntOff);
-  DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
+    ASSERT(kernel->interrupt->getLevel() == IntOff);
+    DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
 
-  thread->setStatus(READY);
+    thread->setStatus(READY);
 
-  readyQueue->Insert(thread);
+    thread->setPredictedBurstTime(0.5 * thread->getPredictedBurstTime() + 0.5 * thread->getRunTime());
+    thread->setRunTime(0);
+    readyQueue->Insert(thread);
 
-  DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
+    DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                              << thread->getID()
                              << "] is inserted into readyQueue")
 
@@ -244,6 +246,16 @@ static int readyQueueSorting(List<Thread*>* rq)
 static int SJFCompare(Thread *a, Thread *b) {
     // if(a->getPredictedBurstTime() == b->getPredictedBurstTime())
     //     return 0;
+    if(a != NULL && b != NULL) {
+        DEBUG(dbgSJF, "***Thread ["
+                      << a->getID() << "]'s and thread ["
+                      << b->getID() 
+                      << "]'s burst time are["
+                      << a->getPredictedBurstTime()
+                      << "] and [" 
+                      << b->getPredictedBurstTime() 
+                      << "]***")
+    }
     return a->getPredictedBurstTime() > b->getPredictedBurstTime() ? 1 : -1;
 }
 // <TODO>

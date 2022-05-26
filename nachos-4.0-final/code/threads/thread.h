@@ -117,7 +117,8 @@ class Thread {
     // 1. get ID
     int getID() { return ID; }
     // 2. set/get RunTime
-
+    int getRunTime() { return RunTime; }
+    // void setRunTime() { RunTime = kernel->stats->idleTicks; }
 	// 3. set/get PreditedBurstTime
 
     //<TODO>

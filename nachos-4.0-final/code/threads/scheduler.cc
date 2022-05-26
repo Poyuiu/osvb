@@ -33,6 +33,7 @@
 //<TODO>
 // Declare sorting rule of SortedList
 // Hint: Funtion Type should be "static int"
+static int readyQueueSorting(List<Thread *> *rq) {}
 //<TODO>
 
 //<TODO>
@@ -40,7 +41,8 @@
 Scheduler::Scheduler()
 {
 	//	schedulerType = type;
-	readyList = new List<Thread *>;
+	// readyList = new List<Thread *>;
+    readyQueue = new List<Thread *>;
 	toBeDestroyed = NULL;
 }
 //<TODO>
@@ -54,7 +56,8 @@ Scheduler::Scheduler()
 // Remove readyQueue
 Scheduler::~Scheduler()
 { 
-    delete readyList; 
+    // delete readyList; 
+    delete readyQueue;
 } 
 //<TODO>
 
@@ -76,7 +79,9 @@ Scheduler::ReadyToRun (Thread *thread)
 	DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
 
 	thread->setStatus(READY);
-	readyList->Append(thread);
+	// readyList->Append(thread);
+    readyQueue->Append(thread);
+    readyQueueSorting(readyQueue);
 }
 //<TODO>
 
@@ -95,12 +100,17 @@ Scheduler::FindNextToRun ()
 {
 	ASSERT(kernel->interrupt->getLevel() == IntOff);
 
-	if (readyList->IsEmpty()) {
-		return NULL;
-	}
-	else {
-		return readyList->RemoveFront();
-	}
+	// if (readyList->IsEmpty()) {
+	// 	return NULL;
+	// }
+	// else {
+	// 	return readyList->RemoveFront();
+	// }
+    if (readyQueue->IsEmpty()) {
+        return NULL;
+    } else {
+        return readyQueue->RemoveFront();
+    }
 }
 //<TODO>
 
@@ -207,11 +217,15 @@ void
 Scheduler::Print()
 {
     cout << "Ready list contents:\n";
-    readyList->Apply(ThreadPrint);
+    // readyList->Apply(ThreadPrint);
+    readyQueue->Apply(ThreadPrint);
 }
 //<TODO>
 
 //<TODO>
 //Function definition of sorting rule of readyQueue
-
+static int readyQueueSorting(List<Thread *> *rq) {
+    
+    return 0;
+}
 // <TODO>

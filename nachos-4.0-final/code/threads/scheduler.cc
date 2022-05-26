@@ -33,7 +33,7 @@
 //<TODO>
 // Declare sorting rule of SortedList
 // Hint: Funtion Type should be "static int"
-static int readyQueueSorting(List<Thread *> *rq) {}
+static int readyQueueSorting(List<Thread *> *rq);
 //<TODO>
 
 //<TODO>

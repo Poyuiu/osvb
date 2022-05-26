@@ -82,7 +82,7 @@ void Scheduler::ReadyToRun(Thread* thread)
   readyQueue->Append(thread);
   readyQueueSorting(readyQueue);
 
-  DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
+  DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->userTicks << "]: Thread ["
                              << thread->getID()
                              << "] is inserted into readyQueue")
 

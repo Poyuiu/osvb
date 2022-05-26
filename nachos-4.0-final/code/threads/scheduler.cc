@@ -85,13 +85,7 @@ void Scheduler::ReadyToRun(Thread* thread)
   DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                              << thread->getID()
                              << "] is inserted into readyQueue")
-//   if (readyQueue->NumInList() == 2)
-    DEBUG(dbgSJF, "***Thread ["
-                      << readyQueue->Front()->getID << "]'s and thread ["
-                      << thread->getID()
-                      << "]'s burst time are["
-                      << readyQueue->Front()->getPredictedBurstTime() << "] and ["
-                      << thread->getPredictedBurstTime() << "]***")
+
 }
 //<TODO>
 
@@ -234,8 +228,17 @@ Scheduler::Print()
 
 //<TODO>
 //Function definition of sorting rule of readyQueue
-static int readyQueueSorting(List<Thread *> *rq) {
-    
-    return 0;
+static int readyQueueSorting(List<Thread*>* rq) 
+{
+  if (rq->NumInList() == 2)
+    DEBUG(dbgSJF, "***Thread ["
+                      << rq->Front()->getID() << "]'s and thread ["
+                      << thread->getID() 
+                      << "]'s burst time are["
+                      << readyQueue->Front()->getPredictedBurstTime()
+                      << "] and [" 
+                      << thread->getPredictedBurstTime() 
+                      << "]***")
+  return 0;
 }
 // <TODO>

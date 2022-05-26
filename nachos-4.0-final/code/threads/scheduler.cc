@@ -82,7 +82,7 @@ void Scheduler::ReadyToRun(Thread* thread)
                              << thread->getID()
                              << "] is inserted into readyQueue")
   readyQueue->Append(thread);
-  DEBUG(dbgSJF, "***Thread [1]'s and thread [2]'s burst time are["
+  DEBUG(dbgSJF, "***Thread [" << thread->getID() << "]'s and thread [2]'s burst time are["
                     << thread->getPredictedBurstTime() << "] and ["
                     << "]***")
   readyQueueSorting(readyQueue);

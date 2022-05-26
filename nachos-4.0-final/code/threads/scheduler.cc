@@ -80,10 +80,12 @@ Scheduler::ReadyToRun (Thread *thread)
 
 	thread->setStatus(READY);
 	// readyList->Append(thread);
-    Debug(dbgThread, "see queue " << (int)readyQueue->IsEmpty());
+    if(readyQueue->IsEmpty())
+    Debug(dbgThread, "see queue no");
     readyQueue->Append(thread);
     readyQueueSorting(readyQueue);
-    Debug(dbgThread, "see queue " << (int)readyQueue->IsEmpty());
+    if(!readyQueue->IsEmpty())
+    Debug(dbgThread, "see queue have");
 }
 //<TODO>
 

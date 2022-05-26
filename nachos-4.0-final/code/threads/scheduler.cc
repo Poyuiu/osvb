@@ -72,18 +72,17 @@ Scheduler::~Scheduler()
 //<TODO>
 // Hint: readyQueue is preemptive SJF(Shortest Job First).
 // When putting a new thread into readyQueue, you need to check whether preemption or not.
-void
-Scheduler::ReadyToRun (Thread *thread)
+void Scheduler::ReadyToRun(Thread* thread) 
 {
-	ASSERT(kernel->interrupt->getLevel() == IntOff);
-	DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
+  ASSERT(kernel->interrupt->getLevel() == IntOff);
+  DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
 
-	thread->setStatus(READY);
-	
-    readyQueue->Append(thread);
-    readyQueueSorting(readyQueue);
-    
-   
+  thread->setStatus(READY);
+  DEBUG(dbgThread, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
+                                << thread->getID()
+                                << "] is inserted into readyQueue")
+  readyQueue->Append(thread);
+  readyQueueSorting(readyQueue);
 }
 //<TODO>
 

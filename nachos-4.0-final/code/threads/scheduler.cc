@@ -85,7 +85,7 @@ void Scheduler::ReadyToRun(Thread* thread)
   DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                              << thread->getID()
                              << "] is inserted into readyQueue")
-  if (readyQueue->NumInList() == 2)
+//   if (readyQueue->NumInList() == 2)
     DEBUG(dbgSJF, "***Thread ["
                       << readyQueue->Front()->getID << "]'s and thread ["
                       << thread->getID()

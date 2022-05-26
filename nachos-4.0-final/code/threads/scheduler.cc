@@ -235,7 +235,7 @@ static int readyQueueSorting(List<Thread*>* rq)
                       << rq->Front()->getID() << "]'s and thread ["
                       << thread->getID() 
                       << "]'s burst time are["
-                      << readyQueue->Front()->getPredictedBurstTime()
+                      << rq->Front()->getPredictedBurstTime()
                       << "] and [" 
                       << thread->getPredictedBurstTime() 
                       << "]***")

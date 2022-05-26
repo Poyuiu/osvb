@@ -230,7 +230,7 @@ Scheduler::Print()
 //Function definition of sorting rule of readyQueue
 static int readyQueueSorting(List<Thread*>* rq) 
 {
-  if (rq->NumInList() == 2)
+//   if (rq->NumInList() == 2)
     DEBUG(dbgSJF, "***Thread ["
                       << rq->Front()->getID() << "]'s and thread ["
                       << thread->getID() 

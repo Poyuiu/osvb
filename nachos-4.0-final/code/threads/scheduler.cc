@@ -80,8 +80,7 @@ void Scheduler::ReadyToRun(Thread* thread)
 
   thread->setStatus(READY);
 
-  readyQueue->Append(thread);
-  readyQueueSorting(readyQueue);
+  readyQueue->Insert(thread);
 
   DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                              << thread->getID()

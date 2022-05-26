@@ -32,7 +32,7 @@
 //
 //	   there is no synchronization for concurrent accesses
 //	   files have a fixed size, set when the file is created
-//	   files cannot be bigger than about 3KB in size
+//	   files  bigger than about 3KB in size
 //	   there is no hierarchical directory structure, and only a limited
 //	     number of files can be added to the system
 //	   there is no attempt to make the system robust to failures

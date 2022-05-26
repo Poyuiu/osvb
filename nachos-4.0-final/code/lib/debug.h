@@ -31,6 +31,7 @@ const char dbgNet = 'n'; 		// network emulation (NETWORK)
 //<TODO>
 //dbgSJF...
 const char dbgSJF = 'j';
+const char dbgStack = 'c';
 //<TODO>
 
 class Debug {

@@ -323,7 +323,7 @@ void
 Thread::StackAllocate (VoidFunctionPtr func, void *arg)
 {
     stack = (int *) AllocBoundedArray(StackSize * sizeof(int));
-
+    DEBUG(dbgStack, (int)func << "'s stack" << (stack == NULL));
 #ifdef PARISC
     // HP stack works from low addresses to high addresses
     // everyone else works the other way: from high addresses to low addresses

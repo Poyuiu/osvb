@@ -79,13 +79,11 @@ Scheduler::ReadyToRun (Thread *thread)
 	DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
 
 	thread->setStatus(READY);
-	// readyList->Append(thread);
-    // if(readyQueue->IsEmpty())
-    DEBUG(dbgThread, "see queue" << (bool)readyQueue->IsEmpty());
+	
     readyQueue->Append(thread);
     readyQueueSorting(readyQueue);
-    if(!readyQueue->IsEmpty())
-    DEBUG(dbgThread, "yes");
+    
+   
 }
 //<TODO>
 

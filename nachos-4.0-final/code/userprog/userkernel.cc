@@ -184,7 +184,7 @@ UserProgKernel::InitializeOneThread(char* name)
 	t[threadNum] = new Thread(name, threadNum);
 	t[threadNum]->space = new AddrSpace();
 	t[threadNum]->Fork((VoidFunctionPtr) &ForkExecute, (void *)t[threadNum]);
-	cout << "Thread " << name << " is executing." << endl;
+	// cout << "Thread " << name << " is executing." << endl;
 	//<TODO>
 
     threadNum++;

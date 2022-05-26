@@ -121,7 +121,7 @@ class Thread {
     int setRunTime() { RunTime += 10; }
     // void setRunTime() { RunTime = kernel->stats->idleTicks; }
 	// 3. set/get PreditedBurstTime
-
+    int getPredictedBurstTime() { return PredictedBurstTime; }
     //<TODO>
 
   private:

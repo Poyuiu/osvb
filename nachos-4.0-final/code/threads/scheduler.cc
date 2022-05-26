@@ -34,6 +34,7 @@
 // Declare sorting rule of SortedList
 // Hint: Funtion Type should be "static int"
 static int readyQueueSorting(List<Thread *> *rq);
+static int SJFCompare(Thread *a, Thread *b);
 //<TODO>
 
 //<TODO>
@@ -240,5 +241,10 @@ static int readyQueueSorting(List<Thread*>* rq)
                       << rq->Tail()->getPredictedBurstTime() 
                       << "]***")
   return 0;
+}
+static int SJFCompare(Thread *a, Thread *b) {
+    if(a->getPredictedBurstTime() == b->getPredictedBurstTime())
+        return 0;
+    return a->getPredictedBurstedTime() > b->getPredictedBurstTime() ? 1 : -1;
 }
 // <TODO>

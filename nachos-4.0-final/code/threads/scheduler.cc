@@ -276,7 +276,7 @@ static int SJFCompare(Thread *a, Thread *b) {
     if (a->getPredictedBurstTime() > b ->getPredictedBurstTime()) {
         // b->setPreemption(1);
         return 1;
-    } else (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
+    } else if (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
         return 0;
     } else return -1;
     // return a->getPredictedBurstTime() > b->getPredictedBurstTime() ? 1 : -1;

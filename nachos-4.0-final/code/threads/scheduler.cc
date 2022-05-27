@@ -277,13 +277,13 @@ static int SJFCompare(Thread *a, Thread *b) {
     }
     if(a==NULL) DEBUG(dbgSJF, "a NULL");
     if(b==NULL) DEBUG(dbgSJF, "b NULL");
-    if (a->getPredictedBurstTime() > b ->getPredictedBurstTime()) {
+    if (a->getPredictedBurstTime() < b ->getPredictedBurstTime()) {
         // b->setPreemption(1);
         return 1;
     // } else if (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
     //     return 0;
     } else if (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
-        if (b->getID() > a->getID()) return 1;
+        if (a->getID() > b->getID()) return 1;
         else return 0;
     } else {
         return -1;

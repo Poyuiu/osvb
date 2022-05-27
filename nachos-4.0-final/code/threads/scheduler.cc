@@ -121,16 +121,16 @@ Scheduler::FindNextToRun ()
       DEBUG(dbgSJF, "<YS> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                                   << readyQueue->Front()->getID()
                                   << "] is now selected for execution, thread ["
-                                  << this->getID()
+                                  << kernel->currentThread->getID()
                                   << "] is replaced, and it has executed ["
-                                  << this->getRunTime() << "] ticks")
+                                  << kernel->currentThread->getRunTime() << "] ticks")
     } else {
       DEBUG(dbgSJF, "<S> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                                  << readyQueue->Front()->getID()
                                  << "] is now selected for execution, thread ["
-                                 << this->getID()
+                                 << kernel->currentThread->getID()
                                  << "] is replaced, and it has executed ["
-                                 << this->getRunTime() << "] ticks")
+                                 << kernel->currentThread->getRunTime() << "] ticks")
     }
     return readyQueue->RemoveFront();
   }

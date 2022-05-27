@@ -81,13 +81,15 @@ void Scheduler::ReadyToRun(Thread* thread)
     thread->setStatus(READY);
 
     // thread->setPreemption(0);
-    readyQueue->Insert(thread); // two process is useless
+    readyQueue->Insert(thread); // SJF
 
     DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                              << thread->getID()
                              << "] is inserted into readyQueue")
+    
+    // Preemption
     if(thread->getPredictedBurstTime() < kernel->currentThread->getPredictedBurstTime()) {
-        // kernel->interrupt->YieldOnReturn();
+        kernel->currentThread->Yield();
     }
 }
 //<TODO>

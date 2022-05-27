@@ -271,19 +271,16 @@ Thread::Sleep (bool finishing)
     int recordOldRunTime = this->getRunTime(), recordOldPredicted = this->getPredictedBurstTime();
     this->setPredictedBurstTime(0.5 * this->getPredictedBurstTime() + 0.5 * this->getRunTime());
     this->setRunTime(0);
-    DEBUG(dbgSJF, "<U> Tick [" 
-    << kernel->stats->totalTicks 
-    << "]: Thread [" 
-    << this->getID()
-    << "] update approximateburst time, from: ["
-    << recordOldPredicted
-    << "] + ["
-    << recordOldRunTime
-    << "], to ["
-    << this->getPredictedBurstTime()
-    << "]")
+    if (this->getID != 0) {
+      DEBUG(dbgSJF, "<U> Tick [" << kernel->stats->totalTicks << "]: Thread ["
+                                 << this->getID()
+                                 << "] update approximateburst time, from: ["
+                                 << recordOldPredicted << "] + ["
+                                 << recordOldRunTime << "], to ["
+                                 << this->getPredictedBurstTime() << "]")
+    }
 
-	kernel->scheduler->Run(nextThread, finishing);
+        kernel->scheduler->Run(nextThread, finishing);
 }
 //<TODO>
 

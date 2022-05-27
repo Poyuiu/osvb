@@ -123,6 +123,10 @@ class Thread {
 	// 3. set/get PreditedBurstTime
     int getPredictedBurstTime() { return PredictedBurstTime; }
     void setPredictedBurstTime(int t) { PredictedBurstTime = t; }
+
+    // use preemption flag
+    int getPreemption() { return Preemption; }
+    void setPreemption(int p) { Preemption = p; }
     //<TODO>
 
   private:
@@ -142,6 +146,7 @@ class Thread {
 	int ID;
 	int RunTime;
 	int PredictedBurstTime;
+  int Preemption;
 	//Trace end>
 
 #ifdef USER_PROGRAM

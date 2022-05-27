@@ -80,6 +80,7 @@ void Scheduler::ReadyToRun(Thread* thread)
 
     thread->setStatus(READY);
 
+    thread->setPreemption(0);
     readyQueue->Insert(thread);
 
     DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
@@ -144,7 +145,27 @@ Scheduler::Run (Thread *nextThread, bool finishing)
     Thread *oldThread = kernel->currentThread;
  
 //	cout << "Current Thread" <<oldThread->getName() << "    Next Thread"<<nextThread->getName()<<endl;
-   
+    if(nextThread->getPreemption()) {
+        DEBUG(dbgSJF, "<YS> Tick ["
+        << kernel->stats->totalTicks
+        << "]: Thread ["
+        << nextThread->getID()
+        << "] is now selected for execution, thread ["
+        << oldThread->getID()
+        << "] is replaced, and it has executed ["
+        << oldThread->getRunTime()
+        << "] ticks")
+    } else {
+        DEBUG(dbgSJF, "<S> Tick ["
+        << kernel->stats->totalTicks
+        << "]: Thread ["
+        << nextThread->getID()
+        << "] is now selected for execution, thread ["
+        << oldThread->getID()
+        << "] is replaced, and it has executed ["
+        << oldThread->getRunTime()
+        << "] ticks")
+    }
     ASSERT(kernel->interrupt->getLevel() == IntOff);
 
     if (finishing) {	// mark that we need to delete current thread
@@ -172,8 +193,8 @@ Scheduler::Run (Thread *nextThread, bool finishing)
     // in switch.s.  You may have to think
     // a bit to figure out what happens after this, both from the point
     // of view of the thread and from the perspective of the "outside world".
-
-    cout << "Switching from: " << oldThread->getID() << " to: " << nextThread->getID() << endl;
+    DEBUG(dbgSJF, "Switching from: " << oldThread->getName() << " to: " << nextThread->getName());
+    // cout << "Switching from: " << oldThread->getID() << " to: " << nextThread->getID() << endl;
     SWITCH(oldThread, nextThread);
 
     // we're back, running oldThread
@@ -257,6 +278,10 @@ static int SJFCompare(Thread *a, Thread *b) {
                       << b->getPredictedBurstTime() 
                       << "]***")
     }
-    return a->getPredictedBurstTime() > b->getPredictedBurstTime() ? 1 : -1;
+    if (a->getPredictedBurstTime() > b ->getPredictedBurstTime()) {
+        b->setPreemption(1);
+        return 1;
+    } else return -1;
+    // return a->getPredictedBurstTime() > b->getPredictedBurstTime() ? 1 : -1;
 }
 // <TODO>

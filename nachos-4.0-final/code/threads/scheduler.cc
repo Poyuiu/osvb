@@ -33,7 +33,7 @@
 //<TODO>
 // Declare sorting rule of SortedList
 // Hint: Funtion Type should be "static int"
-static int readyQueueSorting(List<Thread *> *rq);
+// static int readyQueueSorting(List<Thread *> *rq);
 static int SJFCompare(Thread *a, Thread *b);
 //<TODO>
 
@@ -104,19 +104,22 @@ void Scheduler::ReadyToRun(Thread* thread)
 Thread *
 Scheduler::FindNextToRun ()
 {
-	ASSERT(kernel->interrupt->getLevel() == IntOff);
+  ASSERT(kernel->interrupt->getLevel() == IntOff);
 
-	// if (readyList->IsEmpty()) {
-	// 	return NULL;
-	// }
-	// else {
-	// 	return readyList->RemoveFront();
-	// }
-    if (readyQueue->IsEmpty()) {
-        return NULL;
-    } else {
-        return readyQueue->RemoveFront();
-    }
+  // if (readyList->IsEmpty()) {
+  // 	return NULL;
+  // }
+  // else {
+  // 	return readyList->RemoveFront();
+  // }
+  if (readyQueue->IsEmpty()) {
+    return NULL;
+  } else {
+    DEBUG(dbgSJF, "<R> Tick [" << kernel->stats->totalTicks << "]: Thread ["
+                               << readyQueue->Front()->getID()
+                               << "] is removed from readyQueue")
+    return readyQueue->RemoveFront();
+  }
 }
 //<TODO>
 
@@ -230,19 +233,19 @@ Scheduler::Print()
 
 //<TODO>
 //Function definition of sorting rule of readyQueue
-static int readyQueueSorting(List<Thread*>* rq) 
-{
-    if ((int)rq->NumInList() == 2)
-        DEBUG(dbgSJF, "***Thread ["
-                      << rq->Front()->getID() << "]'s and thread ["
-                      << rq->Tail()->getID() 
-                      << "]'s burst time are["
-                      << rq->Front()->getPredictedBurstTime()
-                      << "] and [" 
-                      << rq->Tail()->getPredictedBurstTime() 
-                      << "]***")
-  return 0;
-}
+// static int readyQueueSorting(List<Thread*>* rq) 
+// {
+//     if ((int)rq->NumInList() == 2)
+//         DEBUG(dbgSJF, "***Thread ["
+//                       << rq->Front()->getID() << "]'s and thread ["
+//                       << rq->Tail()->getID() 
+//                       << "]'s burst time are["
+//                       << rq->Front()->getPredictedBurstTime()
+//                       << "] and [" 
+//                       << rq->Tail()->getPredictedBurstTime() 
+//                       << "]***")
+//   return 0;
+// }
 static int SJFCompare(Thread *a, Thread *b) {
     // if(a->getPredictedBurstTime() == b->getPredictedBurstTime())
     //     return 0;

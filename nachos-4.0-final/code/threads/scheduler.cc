@@ -112,7 +112,6 @@ Scheduler::FindNextToRun ()
   // 	return readyList->RemoveFront();
   // }
   if (readyQueue->IsEmpty()) {
-    DEBUG(dbgSJF, "EMPPPPPPPPPPPP");
     return NULL;
   } else {
     DEBUG(dbgSJF, "<R> Tick [" << kernel->stats->totalTicks << "]: Thread ["

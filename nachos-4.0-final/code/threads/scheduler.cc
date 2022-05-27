@@ -80,8 +80,6 @@ void Scheduler::ReadyToRun(Thread* thread)
 
     thread->setStatus(READY);
 
-    thread->setPredictedBurstTime(0.5 * thread->getPredictedBurstTime() + 0.5 * thread->getRunTime());
-    thread->setRunTime(0);
     readyQueue->Insert(thread);
 
     DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["

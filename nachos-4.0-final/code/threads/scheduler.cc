@@ -80,14 +80,14 @@ void Scheduler::ReadyToRun(Thread* thread)
 
     thread->setStatus(READY);
 
-    thread->setPreemption(0);
+    // thread->setPreemption(0);
     readyQueue->Insert(thread); // two process is useless
 
     DEBUG(dbgSJF, "<I> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                              << thread->getID()
                              << "] is inserted into readyQueue")
     if(thread->getPredictedBurstTime() < kernel->currentThread->getPredictedBurstTime()) {
-        kernel->interrupt->YieldOnReturn();
+        // kernel->interrupt->YieldOnReturn();
     }
 }
 //<TODO>
@@ -278,7 +278,7 @@ static int SJFCompare(Thread *a, Thread *b) {
     if(a==NULL) DEBUG(dbgSJF, "a NULL");
     if(b==NULL) DEBUG(dbgSJF, "b NULL");
     if (a->getPredictedBurstTime() > b ->getPredictedBurstTime()) {
-        b->setPreemption(1);
+        // b->setPreemption(1);
         return 1;
     // } else if (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
     //     return 0;

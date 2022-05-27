@@ -269,7 +269,7 @@ Thread::Sleep (bool finishing)
 		// returns when it's time for us to run
     
     int recordOldRunTime = this->getRunTime(), recordOldPredicted = this->getPredictedBurstTime();
-    thread->setPredictedBurstTime(0.5 * thread->getPredictedBurstTime() + 0.5 * thread->getRunTime());
+    thread->setPredictedBurstTime(0.5 * this->getPredictedBurstTime() + 0.5 * this->getRunTime());
     thread->setRunTime(0);
     DEBUG(dbgSJF, "<U> Tick [" 
     << kernel->stats->totalTicks 

@@ -283,7 +283,8 @@ static int SJFCompare(Thread *a, Thread *b) {
     // } else if (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
     //     return 0;
     } else if (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
-        return -1; // org return 0 but TA's sample p2>p1
+        if (b->getID() > a->getID()) return 1;
+        else return 0;
     } else {
         return -1;
     }

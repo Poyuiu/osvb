@@ -117,6 +117,21 @@ Scheduler::FindNextToRun ()
     DEBUG(dbgSJF, "<R> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                                << readyQueue->Front()->getID()
                                << "] is removed from readyQueue")
+    if (readyQueue->Front()->getPreemption()) {
+      DEBUG(dbgSJF, "<YS> Tick [" << kernel->stats->totalTicks << "]: Thread ["
+                                  << readyQueue->Front()->getID()
+                                  << "] is now selected for execution, thread ["
+                                  << this->getID()
+                                  << "] is replaced, and it has executed ["
+                                  << this->getRunTime() << "] ticks")
+    } else {
+      DEBUG(dbgSJF, "<S> Tick [" << kernel->stats->totalTicks << "]: Thread ["
+                                 << readyQueue->Front()->getID()
+                                 << "] is now selected for execution, thread ["
+                                 << this->getID()
+                                 << "] is replaced, and it has executed ["
+                                 << this->getRunTime() << "] ticks")
+    }
     return readyQueue->RemoveFront();
   }
 }
@@ -145,27 +160,7 @@ Scheduler::Run (Thread *nextThread, bool finishing)
     Thread *oldThread = kernel->currentThread;
  
 //	cout << "Current Thread" <<oldThread->getName() << "    Next Thread"<<nextThread->getName()<<endl;
-    if(nextThread->getPreemption()) {
-        DEBUG(dbgSJF, "<YS> Tick ["
-        << kernel->stats->totalTicks
-        << "]: Thread ["
-        << nextThread->getID()
-        << "] is now selected for execution, thread ["
-        << oldThread->getID()
-        << "] is replaced, and it has executed ["
-        << oldThread->getRunTime()
-        << "] ticks")
-    } else {
-        DEBUG(dbgSJF, "<S> Tick ["
-        << kernel->stats->totalTicks
-        << "]: Thread ["
-        << nextThread->getID()
-        << "] is now selected for execution, thread ["
-        << oldThread->getID()
-        << "] is replaced, and it has executed ["
-        << oldThread->getRunTime()
-        << "] ticks")
-    }
+
     ASSERT(kernel->interrupt->getLevel() == IntOff);
 
     if (finishing) {	// mark that we need to delete current thread
@@ -193,7 +188,7 @@ Scheduler::Run (Thread *nextThread, bool finishing)
     // in switch.s.  You may have to think
     // a bit to figure out what happens after this, both from the point
     // of view of the thread and from the perspective of the "outside world".
-    DEBUG(dbgSJF, "Switching from: " << oldThread->getName() << " to: " << nextThread->getName());
+    DEBUG(dbgSJF, "Switching from: " << oldThread->getID() << " to: " << nextThread->getID());
     // cout << "Switching from: " << oldThread->getID() << " to: " << nextThread->getID() << endl;
     SWITCH(oldThread, nextThread);
 

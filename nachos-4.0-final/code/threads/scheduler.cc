@@ -275,16 +275,16 @@ static int SJFCompare(Thread *a, Thread *b) {
                       << b->getPredictedBurstTime() 
                       << "]***")
     }
-    if (a->getPredictedBurstTime() < b ->getPredictedBurstTime()) {
+    if (a->getPredictedBurstTime() > b ->getPredictedBurstTime()) {
         // b->setPreemption(1);
-        return -1;
+        return 1;
     // } else if (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
     //     return 0;
     } else if (a->getPredictedBurstTime() == b->getPredictedBurstTime()) {
-        return 1; // org return 0 but TA's sample p2>p1
+        return -1; // org return 0 but TA's sample p2>p1
     } else {
         b->setPreemption(1);
-        return 1;
+        return -1;
     }
     // return a->getPredictedBurstTime() > b->getPredictedBurstTime() ? 1 : -1;
 }

@@ -189,7 +189,7 @@ Interrupt::OneTick()
 void
 Interrupt::YieldOnReturn()
 { 
-    ASSERT(inHandler == TRUE);  
+    // ASSERT(inHandler == TRUE);  
     yieldOnReturn = TRUE; 
 }
 

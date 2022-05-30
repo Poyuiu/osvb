@@ -89,7 +89,7 @@ void Scheduler::ReadyToRun(Thread* thread)
     
     // Preemption
     if(thread->getPredictedBurstTime() < kernel->currentThread->getPredictedBurstTime()) {
-        kernel->currentThread->Yield();
+        kernel->interrupt->YieldOnReturn();
     }
 }
 //<TODO>

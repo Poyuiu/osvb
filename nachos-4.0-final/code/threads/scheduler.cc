@@ -90,6 +90,7 @@ void Scheduler::ReadyToRun(Thread* thread)
     // Preemption
     if(thread->getPredictedBurstTime() < kernel->currentThread->getPredictedBurstTime()) {
         kernel->interrupt->YieldOnReturn();
+        thread->setPreemption(1);
     }
 }
 //<TODO>
@@ -122,6 +123,7 @@ Scheduler::FindNextToRun ()
                                << readyQueue->Front()->getID()
                                << "] is removed from readyQueue")
     if (readyQueue->Front()->getPreemption()) {
+    readyQueue->Front()->setPreemption(0);
       DEBUG(dbgSJF, "<YS> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                                   << readyQueue->Front()->getID()
                                   << "] is now selected for execution, thread ["
@@ -129,6 +131,7 @@ Scheduler::FindNextToRun ()
                                   << "] is replaced, and it has executed ["
                                   << kernel->currentThread->getRunTime() << "] ticks")
     } else {
+        
       DEBUG(dbgSJF, "<S> Tick [" << kernel->stats->totalTicks << "]: Thread ["
                                  << readyQueue->Front()->getID()
                                  << "] is now selected for execution, thread ["

@@ -109,13 +109,6 @@ Thread *
 Scheduler::FindNextToRun ()
 {
   ASSERT(kernel->interrupt->getLevel() == IntOff);
-
-  // if (readyList->IsEmpty()) {
-  // 	return NULL;
-  // }
-  // else {
-  // 	return readyList->RemoveFront();
-  // }
   if (readyQueue->IsEmpty()) {
     return NULL;
   } else {
@@ -280,8 +273,6 @@ static int SJFCompare(Thread *a, Thread *b) {
                       << b->getPredictedBurstTime() 
                       << "]***")
     }
-    if(a==NULL) DEBUG(dbgSJF, "a NULL");
-    if(b==NULL) DEBUG(dbgSJF, "b NULL");
     if (a->getPredictedBurstTime() < b ->getPredictedBurstTime()) {
         // b->setPreemption(1);
         return -1;
